@@ -1,0 +1,34 @@
+[
+  '{{repeat(10)}}',
+  {
+    Username: '{{firstName()}}',
+    Password: 'password',
+    Workouts: [
+      '{{repeat(3)}}',
+      {
+        DateCompleted: '{{date(new Date(2020,0,1), new Date(2020, 7, 31), "YYYY-MM-dd")}}',
+        WorkoutTypeId: function(num) {
+          return num.integer(1,4);} ,
+        Duration: function(num) {
+          return num.integer(10,120);} ,
+        MoodId: function(num) {
+          return num.integer(1,3);} 
+      }
+    ]
+  }
+]
+////////////////////////////////////////////
+[
+  '{{repeat(10)}}',
+  {
+    Username: '{{firstName()}}',
+    Password: 'password',
+    Workouts: [
+      '{{repeat(3)}}',
+      {
+        id: '{{index()}}',
+        name: '{{firstName()}} {{surname()}}'
+      }
+    ]
+  }
+]
