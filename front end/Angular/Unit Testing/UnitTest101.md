@@ -30,11 +30,11 @@ d. (if applicable) Expect the function has been called with the correct paramete
 2. To test variables have been set
    Notes:
    • This includes cases where variables have been set from values from observables.
-   • Using onInit as an example
+   • Using ngOnInit as an example
 
 a. Expect the variable to be undefined.
-b. Run onInit()
-i. Typically, only the function that you’re testing is run, but there are cases that require running other functions supporting the change to this variable. i.e.: In the case of general-information component, stateYearId should be set with the results from the queryParams Observable. So, the variable StateYearId would be expected to be undefined, onInit() would be triggered, and the queryParams Subject would be called with a value {stateYearId: ‘1’}. I would then expect stateYearId to be equal to 1.
+b. Run ngOnInit()
+i. Typically, only the function that you’re testing is run, but there are cases that require running other functions supporting the change to this variable. i.e.: In the case of general-information component, stateYearId should be set with the results from the queryParams Observable. So, the variable StateYearId would be expected to be undefined, ngOnInit() would be triggered, and the queryParams Subject would be called with a value {stateYearId: ‘1’}. I would then expect stateYearId to be equal to 1.
 c. Expect the variable to equal whatever you are expecting it to equal.
 
 3. Testing values returned by a function:
@@ -105,3 +105,11 @@ My Steps:
 2. After that was still unsuccessful, Nisaa said there HAD to be spies in the describe block. We notice that all of the functions within getGeneralInfoForm (which is the function I was using to create my form) had spies earlier on in the describe block. 
 3. Nissa suggested I add a describe block above my code, including the tests the spies were for, to pull the three spies out of scope for my describe block. I did as she suggested.
 4. My test passed with no problem after that.
+
+Overriding a spy:
+
+When there is already a spy and you need that spy to return a different value, you can call the spy by its name (vague much?) and add ".and.returnValueOf(newValue)" to override.
+
+```typescript
+            masterServiceStub.statusDropdownDataServiceStub.checkReviewCompleted.and.returnValue(true); // set state to false
+```
