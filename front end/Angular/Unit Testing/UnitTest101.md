@@ -113,3 +113,50 @@ When there is already a spy and you need that spy to return a different value, y
 ```typescript
             masterServiceStub.statusDropdownDataServiceStub.checkReviewCompleted.and.returnValue(true); // set state to false
 ```
+
+When testing, if you use TestBed... Your service injection order does not matter:
+
+```typescript
+TestBed.configureTestingModule({
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [ReactiveFormsModule],
+            providers: [
+                {
+                    provide: TimelineTrackerFormService,
+                    useValue: masterServiceStub.timelineTrackerFormServiceStub
+                },
+                {
+                    provide: TimelineTrackerFormResource,
+                    useValue: masterServiceStub.timelineTrackerFormResourceStub
+                },
+                { provide: StatusDropdownDataService, useValue: masterServiceStub.statusDropdownDataServiceStub },
+                {
+                    provide: StatusInstructionsService,
+                    useValue: masterServiceStub.statusInstructionsServiceStub
+                }
+            ],
+            declarations: [StatusDropdownComponent, StatusInstructionsComponent]
+        }).compileComponents();
+```
+
+If you do NOT use TestBed... your service injection order MATTERS!
+```typescript
+beforeEach(() => {
+        masterServiceStub = new MasterServiceStub();
+        masterFormStub = new MasterFormStub();
+
+        component = new TimelineTrackerComponent(
+            <any>masterServiceStub.matDialogStub,
+            <any>masterServiceStub.timelineTrackerFormServiceStub,
+            <any>masterServiceStub.timelineTrackerFormResourceStub,
+            <any>masterServiceStub.timelineTrackerDataServiceStub,
+            <any>masterServiceStub.parseRouteServiceStub,
+            <any>masterServiceStub.activatedRouteStub,
+            <any>masterServiceStub.checkFormsServiceStub,
+            <any>masterServiceStub.dropdownResourceStub,
+            <any>masterServiceStub.statusInstructionsServiceStub,
+            <any>masterServiceStub.statusDropdownDataServiceStub
+
+        );
+    });
+```
