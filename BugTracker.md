@@ -45,7 +45,7 @@ My steps (with Olivia):
 3. At the breakpoint, we checked the values of the different properties by hovering over them. The in the console, I typed in "plansFormArray[0]" and it showed undefined. So I typed in plansFormArray, and Olivia pointed out that she saw the syntax error. We went through all of the properties in the plansFormArray, and Olivia mentioned the property 'controls'. I looked at that property and noticed an array of FormGroups in there. I typed in plansFormArray.controls[0] and saw there was a value of 'hasPips' in the 'value' property.
 4. I added 'controls' to the line in the hasPips function and tested the app again. It worked.
 
-Bug: In testing, eror: cannot read proerty 'get' of undefined in "hasPips function returns value of false if plan has associated PIPs"
+Bug: In testing, error: cannot read proerty 'get' of undefined in "hasPips function returns value of false if plan has associated PIPs"
 
 My steps:
 
